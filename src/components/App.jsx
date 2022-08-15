@@ -41,8 +41,13 @@ export class App extends Component {
 
     getImages(searchQuery, page)
       .then(res => {
+        const items = res.map(({ id, webformatURL, largeImageURL }) => ({
+          id,
+          webformatURL,
+          largeImageURL,
+        }));
         this.setState(prevState => ({
-          items: [...prevState.items, ...res],
+          items: [...prevState.items, ...items],
           isLoading: false,
         }));
         if (res.length === 0) {
@@ -85,11 +90,6 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleSubmit} loadMore={this.loadMore} />
 
         <ToastContainer autoClose={3000} />
-        {isLoading && (
-          <LoaderContainer>
-            <ThreeDots color={theme.colors.searchBarBgc} />
-          </LoaderContainer>
-        )}
 
         {items.length !== 0 && (
           <ImageGallery
@@ -99,8 +99,14 @@ export class App extends Component {
             loadMore={this.loadMore}
           />
         )}
+
         {showModal && (
           <Modal activeimageURL={activeimageURL} onClose={this.toggleModal} />
+        )}
+        {isLoading && (
+          <LoaderContainer>
+            <ThreeDots color={theme.colors.searchBarBgc} />
+          </LoaderContainer>
         )}
       </Container>
     );
