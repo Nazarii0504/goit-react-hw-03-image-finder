@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { ButtonStyled } from './Button.styled';
 
 export const Button = ({ onClick, children }) => (
@@ -5,3 +7,6 @@ export const Button = ({ onClick, children }) => (
     {children}
   </ButtonStyled>
 );
+Button.propTypes = {
+  onClick: PropTypes.func,
+};
