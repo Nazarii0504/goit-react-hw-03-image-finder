@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { toast } from 'react-toastify';
 // import { ImSearch } from 'react-icons/im';
@@ -28,4 +29,7 @@ export const Searchbar = ({ onSubmit }) => {
       </Formik>
     </SearchBarheader>
   );
+};
+PropTypes.Searchbar = {
+  onSubmit: PropTypes.func.isRequired,
 };
